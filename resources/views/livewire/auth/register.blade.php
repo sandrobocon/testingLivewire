@@ -7,12 +7,12 @@
     </div>
     <div>
         <label for="password">Password</label>
-        <input wire:model="email" type="text" id="password" name="password">
+        <input wire:model.lazy="password" type="password" id="password" name="password">
         @error('password') <span>{{ $message }}</span> @enderror
     </div>
     <div>
-        <label for="passwordConfirmation">PasswordConfirmation</label>
-        <input wire:model="email" type="text" id="passwordConfirmation" name="passwordConfirmation">
+        <label for="passwordConfirmation">Password Confirmation</label>
+        <input wire:model.lazy="passwordConfirmation" type="password" id="passwordConfirmation" name="passwordConfirmation">
         @error('passwordConfirmation') <span>{{ $message }}</span> @enderror
     </div>
 

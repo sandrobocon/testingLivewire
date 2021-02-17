@@ -69,6 +69,18 @@ class RegisterTest extends TestCase
     }
 
     /** @test*/
+    public function it_should_see_email_hasnt_already_been_taken_validation_message_as_user_types()
+    {
+        User::factory()->create(['email'=>'exist@email.com']);
+
+        Livewire::test('auth.register')
+            ->set('email','not-exist@email.com')
+            ->assertHasNoErrors()
+            ->set('email','exist@email.com')
+            ->assertHasErrors(['email'=>'unique']);
+    }
+
+    /** @test*/
     public function it_should_require_password()
     {
         Livewire::test('auth.register')
