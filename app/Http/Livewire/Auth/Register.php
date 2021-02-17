@@ -19,10 +19,12 @@ class Register extends Component
         ]);
 
 
-        User::create([
-            'email' => $data->email,
-            'password' => bcrypt($data->password),
+        $user = User::create([
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
         ]);
+
+        auth()->login($user);
 
         return redirect('/');
     }
