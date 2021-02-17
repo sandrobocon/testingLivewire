@@ -4,7 +4,8 @@
 </head>
 
 <body>
-    @yield('content')
+{{-- Change from V1 to V2 (livewire)   @yield('content') ==> TO ==>  {{$slot}} --}}
+    {{$slot}}
 
 
     @livewireScripts
