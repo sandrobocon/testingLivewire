@@ -7,6 +7,7 @@ use Livewire\Component;
 
 class Register extends Component
 {
+    public $name = '';
     public $email = '';
     public $password = '';
     public $passwordConfirmation = '';
@@ -19,12 +20,14 @@ class Register extends Component
     public function register()
     {
         $data = $this->validate([
-            'email' => ['required','email','unique:users'],
-            'password' => ['required','min:6','same:passwordConfirmation'],
+            'name' => ['required', 'string', 'between:3,100'],
+            'email' => ['required', 'email', 'unique:users'],
+            'password' => ['required', 'min:6', 'same:passwordConfirmation'],
         ]);
 
 
         $user = User::create([
+            'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
@@ -36,6 +39,6 @@ class Register extends Component
 
     public function render()
     {
-        return view('livewire.auth.register');
+        return view('livewire.auth.register')->layout('layouts.guest');
     }
 }

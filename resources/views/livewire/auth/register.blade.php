@@ -10,8 +10,13 @@
             <input type="hidden" name="remember" value="true">
             <div class="rounded-md shadow-sm -space-y-px">
                 <div>
+                    <label for="name" class="sr-only">Email address</label>
+                    <input wire:model="name" id="name" name="name" autocomplete="name" class="@error('name') border-red-500 @enderror appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Your Name">
+                    @error('name') <div class="text-sm text-red-500 mt-1 mb-1">{{ $message }}</div> @enderror
+                </div>
+                <div>
                     <label for="email-address" class="sr-only">Email address</label>
-                    <input wire:model="email" id="email-address" name="email" type="email" autocomplete="email" class="@error('email') border-red-500 @enderror appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address">
+                    <input wire:model="email" id="email-address" name="email" type="email" autocomplete="email" class="@error('email') border-red-500 @enderror appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address">
                     @error('email') <div class="text-sm text-red-500 mt-1 mb-1">{{ $message }}</div> @enderror
                 </div>
                 <div>
@@ -39,7 +44,7 @@
         </form>
 
         <p class="mt-2 text-center text-sm text-gray-600">
-            <a href="/login" class="font-medium text-indigo-600 hover:text-indigo-500">
+            <a href="{{route('login')}}" class="font-medium text-indigo-600 hover:text-indigo-500">
                 Already have an account?
             </a>
         </p>
