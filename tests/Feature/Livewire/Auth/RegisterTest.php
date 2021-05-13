@@ -23,6 +23,7 @@ class RegisterTest extends TestCase
     public function it_should_register()
     {
         Livewire::test('auth.register')
+            ->set('name','TestName')
             ->set('email','test@email.com')
             ->set('password','password')
             ->set('passwordConfirmation','password')
