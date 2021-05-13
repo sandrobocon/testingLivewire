@@ -56,7 +56,24 @@
 
 
                     </div>
-                    <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+
+                    <div class="space-x-5 px-4 py-3 bg-gray-50 text-right sm:px-6">
+                        <span>
+                            <span
+                                x-data="{ open: false }"
+                                x-init="
+                                    {{--window.livewire.on('notify-saved', () => {  // listen globally--}}
+                                    @this.on('notify-saved', () => { {{-- listen only to selfWireComponent --}}
+                                        setTimeout(() => { open = false }, 2500);
+                                        open = true;
+                                    })
+                                "
+                                x-show.transition.duration.1000ms="open"
+                                style="display: none;"
+                                class="text-gray-500"
+                            >Saved!</span>
+                        </span>
+
                         <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             Save
                         </button>

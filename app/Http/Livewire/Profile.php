@@ -31,5 +31,8 @@ class Profile extends Component
         auth()->user()->update($profileData);
 
         $this->dispatchBrowserEvent('notify', 'Profile Saved!');
+
+//        $this->emit('notify-saved');  // Emit globally
+        $this->emitSelf('notify-saved');  // Emit only to self
     }
 }
