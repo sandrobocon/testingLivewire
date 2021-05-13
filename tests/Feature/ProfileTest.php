@@ -34,15 +34,30 @@ class ProfileTest extends TestCase
 
         Livewire::actingAs($user)
             ->test('profile')
-            ->set('username','foo')
-            ->set('about','bar')
+            ->set('username', 'foo')
+            ->set('about', 'bar')
             ->call('save');
 
         $user->refresh();
 
-        $this->assertEquals('foo',$user->username);
+        $this->assertEquals('foo', $user->username);
 
-        $this->assertEquals('bar',$user->about);
+        $this->assertEquals('bar', $user->about);
+    }
+
+    /** @test */
+    public function it_should_have_pre_populated()
+    {
+        $user = User::factory()->create([
+            'username' => 'foo',
+            'about' => 'bar',
+        ]);
+
+        Livewire::actingAs($user)
+            ->test('profile')
+            ->set('username', 'foo')
+            ->set('about', 'bar')
+            ->call('save');
     }
 
     /** @test */
@@ -52,9 +67,9 @@ class ProfileTest extends TestCase
 
         Livewire::actingAs($user)
             ->test('profile')
-            ->set('username',str_repeat('a',25))
+            ->set('username', str_repeat('a', 25))
             ->call('save')
-            ->assertHasErros(['username' => 'max']);
+            ->assertHasErrors(['username' => 'max']);
     }
 
     /** @test */
@@ -64,8 +79,8 @@ class ProfileTest extends TestCase
 
         Livewire::actingAs($user)
             ->test('profile')
-            ->set('about',str_repeat('a',141))
+            ->set('about', str_repeat('a', 141))
             ->call('save')
-            ->assertHasErros(['about' => 'max']);
+            ->assertHasErrors(['about' => 'max']);
     }
 }

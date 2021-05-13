@@ -14,6 +14,13 @@ class Profile extends Component
         return view('livewire.profile');
     }
 
+    public function mount()
+    {
+        $this->username = auth()->user()->username;
+        $this->about    = auth()->user()->about;
+    }
+
+
     public function save()
     {
         $profileData = $this->validate([
