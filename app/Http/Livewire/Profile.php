@@ -6,6 +6,7 @@ use Livewire\Component;
 
 class Profile extends Component
 {
+    public $saved = false;
     public $username;
     public $about;
 
@@ -29,5 +30,14 @@ class Profile extends Component
         ]);
 
         auth()->user()->update($profileData);
+
+        $this->saved = true;
+    }
+
+    public function updated($field)
+    {
+        if ($field !== 'saved') {
+            $this->saved = false;
+        }
     }
 }

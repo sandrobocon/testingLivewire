@@ -55,9 +55,24 @@ class ProfileTest extends TestCase
 
         Livewire::actingAs($user)
             ->test('profile')
-            ->set('username', 'foo')
-            ->set('about', 'bar')
+            ->assertSet('username', 'foo')
+            ->assertSet('about', 'bar')
             ->call('save');
+    }
+
+    /** @test */
+    public function it_should_show_message_on_save()
+    {
+        $user = User::factory()->create([
+            'username' => 'foo',
+            'about' => 'bar',
+        ]);
+
+        Livewire::actingAs($user)
+            ->test('profile')
+            ->assertDontSee('Profile saved!')
+            ->call('save')
+            ->assertSee('Profile saved!');
     }
 
     /** @test */
