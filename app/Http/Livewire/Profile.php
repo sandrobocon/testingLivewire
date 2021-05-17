@@ -8,7 +8,7 @@ class Profile extends Component
 {
     public $username = '';
     public $about = '';
-    public $count = 0;
+    public $birthday = null;
 
     public function render()
     {
@@ -19,6 +19,7 @@ class Profile extends Component
     {
         $this->username = auth()->user()->username;
         $this->about    = auth()->user()->about;
+        $this->birthday = optional(auth()->user()->birthday)->format('m/d/Y');
     }
 
 
@@ -27,6 +28,7 @@ class Profile extends Component
         $profileData = $this->validate([
             'username' => 'max:24',
             'about'    => 'max:140',
+            'birthday' => 'sometimes|date_format:m/d/Y'
         ]);
 
         auth()->user()->update($profileData);

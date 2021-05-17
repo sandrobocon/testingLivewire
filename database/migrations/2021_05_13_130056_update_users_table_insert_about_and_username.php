@@ -16,6 +16,7 @@ class UpdateUsersTableInsertAboutAndUsername extends Migration
         Schema::table('users', function (Blueprint $table) {
            $table->string('username')->nullable()->after('email');
            $table->string('about')->nullable()->after('username');
+           $table->date('birthday')->nullable()->after('about');
         });
     }
 
@@ -27,7 +28,7 @@ class UpdateUsersTableInsertAboutAndUsername extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-           $table->dropColumn(['username','about']);
+            $table->dropColumn(['username', 'about', 'birthday']);
         });
     }
 }

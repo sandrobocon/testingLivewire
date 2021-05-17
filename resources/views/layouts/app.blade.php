@@ -14,6 +14,8 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         @livewireStyles
 
+        @stack('styles')
+
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -39,5 +41,7 @@
             <x-notification />
         </div>
         @livewireScripts
+
+        @stack('scripts')
     </body>
 </html>

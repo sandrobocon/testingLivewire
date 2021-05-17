@@ -1,4 +1,6 @@
-@props(['leadingAddOn' => false])
+@props([
+    'leadingAddOn' => false,
+])
 
 <div class="mt-1 flex rounded-md shadow-sm">
     @if($leadingAddOn)

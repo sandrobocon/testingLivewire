@@ -13,18 +13,9 @@
                             <x-input.text wire:model="username" id="username" leading-add-on="testingLaravel.com/"/>
                         </x-input.group>
 
-                        <x-input.group label="Count" for="count">
-                            <div wire:model.lazy="count">
-                                Count: <button
-                                    type="button"
-                                    x-data="{ count: 0 }"
-                                    @click="count++; $dispatch('change', count)"
-                                    x-text="count"
-                                >0</button>
-                            </div>
+                        <x-input.group label="Birthday" for="birthday" :error="$errors->first('birthday')">
+                            <x-input.date wire:model="birthday" id="birthday" placeholder="MM/DD/YYYY" />
                         </x-input.group>
-
-                        Livewire Count: {{ $count }}
 
                         <x-input.group label="About" for="about" :error="$errors->first('about')" help-text="Write about yourself.">
                             <x-input.textarea wire:model="about" id="about" name="about" />
