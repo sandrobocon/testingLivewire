@@ -13,6 +13,22 @@
                             <x-input.text wire:model="username" id="username" leading-add-on="testingLaravel.com/"/>
                         </x-input.group>
 
+                        <x-input.group label="Count" for="count">
+                            <div>  {{-- Pure JS are lost when refresh --}}
+                                Count replaced:
+                                <button type="button" onclick="this.innerText = Number(this.innerText) + 1">0</button>
+                            </div>
+
+                            <div wire:ignore>  {{--Using wire:ignore to avoid replacing data when refresh--}}
+                                Count:
+                                <button type="button" onclick="this.innerText = Number(this.innerText) + 1">0</button>
+                            </div>
+
+                            <div> {{-- Alpine changed data is preserved as well--}}
+                                <button type="button" x-data="{ count: 0 }" @click="count++" x-text="count">0</button>
+                            </div>
+                        </x-input.group>
+
                         <x-input.group label="About" for="about" :error="$errors->first('about')" help-text="Write about yourself.">
                             <x-input.textarea wire:model="about" id="about" name="about" />
                         </x-input.group>
