@@ -6,8 +6,9 @@ use Livewire\Component;
 
 class Profile extends Component
 {
-    public $username;
-    public $about;
+    public $username = '';
+    public $about = '';
+    public $count = 0;
 
     public function render()
     {
