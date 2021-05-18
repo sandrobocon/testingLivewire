@@ -33,7 +33,7 @@ class Profile extends Component
         $this->validate([
             'username'  => 'max:24',
             'about'     => 'max:140',
-            'birthday'  => 'sometimes|date_format:m/d/Y',
+            'birthday'  => 'sometimes|nullable|date_format:m/d/Y',
             'newAvatar' => 'image|max:1000'
         ]);
 
