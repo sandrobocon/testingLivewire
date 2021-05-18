@@ -1,14 +1,9 @@
 <div>
-    <div class="md:grid md:grid-cols-3 md:gap-6">
-
+    <div>
         <div class="mt-5 md:mt-0 md:col-span-2">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                Profile
-            </div>
-
             <form wire:submit.prevent="save" class="mt-8 space-y-6" action="#" method="POST">
                 <div class="shadow sm:rounded-md sm:overflow-hidden">
-                    <div class="px-4 py-5 bg-white space-y-6 sm:p-6 space-y-6">
+                    <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                         <x-input.group label="Username" for="username" :error="$errors->first('username')">
                             <x-input.text wire:model="username" id="username" leading-add-on="testingLaravel.com/"/>
                         </x-input.group>
