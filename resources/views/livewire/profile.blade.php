@@ -18,7 +18,7 @@
                         </x-input.group>
 
                         <x-input.group label="About" for="about" :error="$errors->first('about')" help-text="Write about yourself.">
-                            <x-input.textarea wire:model="about" id="about" name="about" />
+                            <x-input.rich-text wire:model.lazy="about" id="about" :initial-value="$about" />
                         </x-input.group>
 
                         <x-input.group label="Photo" for="photo">
