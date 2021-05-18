@@ -17,7 +17,7 @@
                         </x-input.group>
 
                         <x-input.group label="Photo" for="photo" :error="$errors->first('newAvatars.*')" help-text="Send your Photo">
-                            <div class="mt-1 flex items-center">
+                            <x-input.file-upload wire:model="newAvatar" id="photo">
                                 <span class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
                                     @if ($newAvatar)
                                         <img src="{{ $newAvatar->temporaryUrl() }}" alt="Profile Photo">
@@ -25,18 +25,7 @@
                                         <img src="{{ auth()->user()->avatarUrl }}" alt="Profile Photo">
                                     @endif
                                 </span>
-
-                                <span>
-                                    <input type="file" wire:model="newAvatars" multiple>
-{{--                                <button type="button" class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">--}}
-                                    {{--                                    Change--}}
-                                    {{--                                </button>--}}
-                                </span>
-
-                                @foreach($newAvatars as $avatar)
-                                    <img src="{{ $avatar->temporaryUrl() }}" alt="Profile Photo">
-                                @endforeach
-                            </div>
+                            </x-input.file-upload>
                         </x-input.group>
                     </div>
 
