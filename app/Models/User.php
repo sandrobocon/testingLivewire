@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * App\Models\User
@@ -16,6 +17,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string|null $username
  * @property string|null $about
  * @property \Illuminate\Support\Carbon|null $birthday
+ * @property string|null $avatar
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password
  * @property string|null $remember_token
@@ -23,10 +25,12 @@ use Illuminate\Notifications\Notifiable;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
+ * @property-read string $avatar_url
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
  * @method static \Illuminate\Database\Eloquent\Builder|User whereAbout($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereAvatar($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereBirthday($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
@@ -37,6 +41,7 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUsername($value)
+ * @method static \Database\Factories\UserFactory factory(...$parameters)
  * @mixin \Eloquent
  */
 class User extends Authenticatable
@@ -62,6 +67,8 @@ class User extends Authenticatable
 
     public function getAvatarUrlAttribute(): string
     {
-        return 'https://www.gravatar.com/avatar/' . md5( strtolower( trim( $this->email ) ) );
+        return $this->avatar
+            ? Storage::disk('avatars')->url($this->avatar)
+            : 'https://www.gravatar.com/avatar/' . md5( strtolower( trim( $this->email ) ) );
     }
 }
