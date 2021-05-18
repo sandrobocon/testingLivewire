@@ -16,6 +16,13 @@ class Profile extends Component
     public $newAvatars = [];
     public $files = [];
 
+    protected $rules = [
+        'username'  => 'max:24',
+        'about'     => 'max:140',
+        'birthday'  => 'sometimes|nullable|date_format:m/d/Y',
+        'files.*'   => 'nullable|image|max:1000'
+    ];
+
     public function render()
     {
         return view('livewire.profile')
@@ -29,17 +36,13 @@ class Profile extends Component
         $this->birthday = optional(auth()->user()->birthday)->format('m/d/Y');
     }
 
-
     public function save()
     {
-        $this->validate([
-            'username'  => 'max:24',
-            'about'     => 'max:140',
-            'birthday'  => 'sometimes|nullable|date_format:m/d/Y',
-            'files.*'   => 'sometimes|image|max:1000'
-        ]);
+        $this->validate();
 
-        $filename = $this->files[0]->store('/', 'avatars');
+        $filename = isset($this->files[0])
+            ? $this->files[0]->store('/', 'avatars')
+            : null;
 
         auth()->user()->update([
             'username'  => $this->username,

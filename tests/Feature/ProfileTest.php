@@ -58,7 +58,7 @@ class ProfileTest extends TestCase
 
         Livewire::actingAs($user)
             ->test('profile')
-            ->set('newAvatar', $file)
+            ->set('files.0', $file)
             ->call('save');
 
         $user->refresh();

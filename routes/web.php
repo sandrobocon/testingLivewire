@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function(){
 
 
 
-// For more complex content (only exemple not used)
+// For more complex content (only example not used)
 Route::get('/registerComplex', function () {
     return view('registerComplex');
 });

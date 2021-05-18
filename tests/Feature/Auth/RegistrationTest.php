@@ -1,32 +1,36 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Auth;
 
-use App\Providers\RouteServiceProvider;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class RegistrationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_registration_screen_can_be_rendered()
+    /** @test */
+    public function it_should_have_livewire_component()
     {
-        $response = $this->get('/register');
-
-        $response->assertStatus(200);
+        $this->get(route('register'))
+            ->assertSuccessful()
+            ->assertSeeLivewire('auth.register');
     }
 
-    public function test_new_users_can_register()
+    /** @test */
+    public function it_should_register()
     {
-        $response = $this->post('/register', [
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
-        ]);
+        Livewire::test('auth.register')
+            ->set('name', 'Test User')
+            ->set('email', 'test@example.com')
+            ->set('password', 'password')
+            ->set('passwordConfirmation', 'password')
+            ->call('register')
+            ->assertRedirect('/');
 
-        $this->assertAuthenticated();
-        $response->assertRedirect(RouteServiceProvider::HOME);
+        $this->assertTrue(User::whereEmail('test@example.com')->exists());
+        $this->assertEquals('test@example.com', auth()->user()->email);
     }
 }

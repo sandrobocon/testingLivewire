@@ -157,6 +157,16 @@
                         </svg>
                         Reports
                     </a>
+                    <div class="mt-3 space-y-1">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <x-responsive-nav-link :href="route('logout')"
+                                                   onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                                {{ __('Log out') }}
+                            </x-responsive-nav-link>
+                        </form>
+                    </div>
                 </nav>
             </div>
             <div class="flex-shrink-0 flex bg-gray-700 p-4">
