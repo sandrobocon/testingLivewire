@@ -14,6 +14,7 @@ class Profile extends Component
     public $birthday = null;
     public $newAvatar;
     public $newAvatars = [];
+    public $files = [];
 
     public function render()
     {
@@ -35,10 +36,10 @@ class Profile extends Component
             'username'  => 'max:24',
             'about'     => 'max:140',
             'birthday'  => 'sometimes|nullable|date_format:m/d/Y',
-            'newAvatar' => 'image|max:1000'
+            'files.*'   => 'sometimes|image|max:1000'
         ]);
 
-        $filename = $this->newAvatar->store('/', 'avatars');
+        $filename = $this->files[0]->store('/', 'avatars');
 
         auth()->user()->update([
             'username'  => $this->username,
