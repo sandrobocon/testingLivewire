@@ -59,4 +59,9 @@ class User extends Authenticatable
     protected $attributes = [
         'name' => 'defaultNameChangeMe',
     ];
+
+    public function getAvatarUrlAttribute(): string
+    {
+        return 'https://www.gravatar.com/avatar/' . md5( strtolower( trim( $this->email ) ) );
+    }
 }
