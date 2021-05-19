@@ -40,16 +40,18 @@ class Profile extends Component
     {
         $this->validate();
 
-        $filename = isset($this->files[0])
-            ? $this->files[0]->store('/', 'avatars')
-            : null;
-
-        auth()->user()->update([
+        $data = [
             'username'  => $this->username,
             'about'     => $this->about,
             'birthday'  => $this->birthday,
-            'avatar'    => $filename,
-        ]);
+        ];
+
+        if (isset($this->files[0])) {
+            $filename = $this->files[0]->store('/', 'avatars');
+            $data['avatar'] = $filename;
+        }
+
+        auth()->user()->update($data);
 
         $this->dispatchBrowserEvent('notify', 'Profile Saved!');
 
