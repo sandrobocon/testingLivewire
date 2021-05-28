@@ -8,6 +8,16 @@
 -- Purchase here: https://tailwindui.com/
 --}}
 
-<div class="flex rounded-md shadow-sm">
-    <textarea {{ $attributes }} rows="3" class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"></textarea>
+<div class="align-middle min-w-full overflow-x-auto shadow overflow-hidden sm:rounded-lg">
+    <table class="min-w-full divide-y divide-cool-gray-200">
+        <thead>
+            <tr>
+                {{ $head }}
+            </tr>
+        </thead>
+
+        <tbody class="bg-white divide-y divide-cool-gray-200">
+            {{ $body }}
+        </tbody>
+    </table>
 </div>

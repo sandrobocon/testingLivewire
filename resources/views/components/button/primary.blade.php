@@ -8,6 +8,4 @@
 -- Purchase here: https://tailwindui.com/
 --}}
 
-<div class="flex rounded-md shadow-sm">
-    <textarea {{ $attributes }} rows="3" class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"></textarea>
-</div>
+<x-button {{ $attributes->merge(['class' => 'text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 border-indigo-600']) }}>{{ $slot }}</x-button>

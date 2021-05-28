@@ -9,5 +9,8 @@
 --}}
 
 <div class="flex rounded-md shadow-sm">
-    <textarea {{ $attributes }} rows="3" class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"></textarea>
+    <input {{ $attributes }}
+        type="checkbox"
+        class="form-checkbox border-cool-gray-300 block transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+    />
 </div>
