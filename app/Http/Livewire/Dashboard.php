@@ -30,7 +30,7 @@ class Dashboard extends Component
 
     public function mount()
     {
-        $this->editing = Transaction::make(['date' => now()]);
+        $this->editing = $this->makeBlankTransaction();
     }
 
     public function sortBy($field)
@@ -44,6 +44,11 @@ class Dashboard extends Component
         $this->sortField = $field;
     }
 
+    public function makeBlankTransaction()
+    {
+        return Transaction::make(['date' => now(), 'status' => 'success']);
+    }
+
     public function render()
     {
         return view('livewire.dashboard', [
@@ -54,9 +59,19 @@ class Dashboard extends Component
             ->layoutData(['header' => 'Dashboard']);
     }
 
+    public function create()
+    {
+        if ($this->editing->getKey()) {  // Check if there is any inserted data (don't overwrite user inserted data)
+            $this->editing = $this->makeBlankTransaction();
+        }
+        $this->showEditModal = true;
+    }
+
     public function edit(Transaction $transaction)
     {
-        $this->editing = $transaction;
+        if ($this->editing->isNot($transaction)) { // Check if there is any inserted data (don't overwrite user inserted data)
+            $this->editing = $transaction;
+        }
 
         $this->showEditModal = true;
     }
